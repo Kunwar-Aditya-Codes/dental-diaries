@@ -8,12 +8,14 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter(
   createRoutesFromElements(<Route path="/*" element={<App />} />)
 );
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
+    <Toaster />
     <RouterProvider router={router} />
   </React.StrictMode>
 );

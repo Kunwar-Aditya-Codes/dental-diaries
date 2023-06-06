@@ -1,12 +1,13 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import { registerUserSchema } from "../lib/validations/registerSchema";
+import { registerUserSchema } from "../lib/validations/formSchema";
 import { z } from "zod";
 import { registerUser } from "../lib/axios/api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 type UserData = z.infer<typeof registerUserSchema>;
-
 
 const Register: FC = ({}) => {
   const [userData, setUserData] = useState<UserData>({
@@ -39,7 +40,7 @@ const Register: FC = ({}) => {
       !userData.password ||
       !userData.phoneNumber
     ) {
-      alert("Please fill all the fields");
+      toast.error("Please fill all the fields", { duration: 1000 });
       return;
     }
 
@@ -51,10 +52,11 @@ const Register: FC = ({}) => {
       setLoading(false);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        alert(error.issues[0].message);
-      } else {
-        alert("Something went wrong");
-      }
+        toast.error(error.issues[0].message);
+      } else if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      } else toast.error("Something went wrong");
+      setLoading(false);
     }
   };
 

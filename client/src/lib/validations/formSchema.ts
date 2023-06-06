@@ -14,3 +14,8 @@ export const registerUserSchema = z.object({
   age: z.string(),
   phoneNumber: z.string().min(10).max(10),
 });
+
+export const loginUserSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z.string(),
+});

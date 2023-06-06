@@ -1,5 +1,11 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
+import { z } from "zod";
+import { loginUser } from "../lib/axios/api";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { loginUserSchema } from "../lib/validations/formSchema";
 
 interface LoginProps {}
 
@@ -8,10 +14,38 @@ const Login: FC<LoginProps> = ({}) => {
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!userData.email || !userData.password) {
+      toast.error("Please fill all the fields", { duration: 1000 });
+      return;
+    }
+
+    try {
+      const validatedUserData = loginUserSchema.parse(userData);
+      setLoading(true);
+      const response = await loginUser(validatedUserData);
+      console.log(response);
+      setLoading(false);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.issues[0].message);
+      } else if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      } else toast.error("Something went wrong");
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,6 +57,10 @@ const Login: FC<LoginProps> = ({}) => {
         <input
           className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105    md:text-lg"
           type="email"
+          required
+          name="email"
+          onChange={handleChange}
+          value={userData.email}
           autoFocus
           placeholder="Email"
         />
@@ -30,11 +68,19 @@ const Login: FC<LoginProps> = ({}) => {
         <input
           className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105      md:text-lg"
           type="password"
+          required
+          name="password"
+          onChange={handleChange}
+          value={userData.password}
           placeholder="Password"
         />
 
-        <button className="rounded-sm bg-secondary/10 py-2  font-custom uppercase tracking-widest text-secondary  outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
-          Login
+        <button className="flex items-center justify-center rounded-sm bg-secondary/10 py-2  font-custom uppercase tracking-widest text-secondary  outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
+          {loading ? (
+            <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin" />
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
 
