@@ -1,22 +1,61 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
+import { registerUserSchema } from "../lib/validations/registerSchema";
+import { z } from "zod";
+import { registerUser } from "../lib/axios/api";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-interface UserData extends IUser {
-  password: string;
-}
+type UserData = z.infer<typeof registerUserSchema>;
+
 
 const Register: FC = ({}) => {
   const [userData, setUserData] = useState<UserData>({
-    age: 0,
+    age: "",
     email: "",
     firstName: "",
     lastName: "",
     password: "",
-    phoneNumber: 0,
+    phoneNumber: "",
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (
+      !userData.age ||
+      !userData.email ||
+      !userData.firstName ||
+      !userData.lastName ||
+      !userData.password ||
+      !userData.phoneNumber
+    ) {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    try {
+      const validatedUserData = registerUserSchema.parse(userData);
+      setLoading(true);
+      const response = await registerUser(validatedUserData);
+      console.log(response);
+      setLoading(false);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        alert(error.issues[0].message);
+      } else {
+        alert("Something went wrong");
+      }
+    }
   };
 
   return (
@@ -29,38 +68,65 @@ const Register: FC = ({}) => {
           <input
             className="  border-b bg-transparent px-2 py-3 tracking-wide text-secondary   outline-none transition ease-out focus:scale-105   md:flex-grow md:text-lg"
             type="text"
+            name="firstName"
+            onChange={handleChange}
+            value={userData.firstName}
             autoFocus
+            required
             placeholder="First Name"
           />
           <input
             className=" border-b bg-transparent px-2 py-3  tracking-wide  text-secondary   outline-none transition ease-out focus:scale-105    md:flex-grow md:text-lg"
             type="text"
+            name="lastName"
+            onChange={handleChange}
+            value={userData.lastName}
+            required
             placeholder="Last Name"
           />
         </div>
         <input
-          className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105    md:text-lg"
+          className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out  focus:scale-105    md:text-lg"
           type="email"
+          name="email"
+          onChange={handleChange}
+          value={userData.email}
+          required
           placeholder="Email"
         />
         <input
           className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105      md:text-lg"
           type="text"
+          name="age"
+          onChange={handleChange}
+          value={userData.age}
+          required
           placeholder="Age"
         />
         <input
           className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105      md:text-lg"
           type="text"
+          name="phoneNumber"
+          onChange={handleChange}
+          value={userData.phoneNumber}
+          required
           placeholder="Phone Number"
         />
         <input
           className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105      md:text-lg"
           type="password"
+          name="password"
+          onChange={handleChange}
+          required
           placeholder="Password"
         />
 
-        <button className="active: rounded-sm bg-secondary/10  py-2 font-custom uppercase tracking-widest  text-secondary outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
-          Register
+        <button className=" flex w-full items-center  justify-center rounded-sm bg-secondary/10 py-2  text-center font-custom uppercase tracking-widest text-secondary outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
+          {loading ? (
+            <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin" />
+          ) : (
+            "Register"
+          )}
         </button>
       </form>
 

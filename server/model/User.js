@@ -18,7 +18,7 @@ const User = sequelize.define(
     },
 
     age: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
 
@@ -39,7 +39,7 @@ const User = sequelize.define(
     },
 
     phoneNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

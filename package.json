@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/Kunwar-Aditya-Codes/dental-diaries.git",
   "author": "Kunwar Aditya <adityakunwar0147@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.21.4"
+  }
 }
