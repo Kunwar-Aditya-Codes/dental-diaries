@@ -15,44 +15,51 @@ const Register: FC = ({}) => {
     phoneNumber: 0,
   });
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="flex h-full flex-col items-center justify-evenly p-4 text-slate-300">
-      <form className=" flex h-[75%] w-full max-w-[35rem] flex-col  justify-around rounded-lg bg-secondary/10  p-4  font-light  shadow-xl backdrop-blur-md">
-        <div className="flex flex-col space-y-2  md:flex-row md:items-center md:justify-between md:space-x-6 md:space-y-0">
+      <form
+        onSubmit={handleSubmit}
+        className=" flex h-[75%] w-full max-w-[40rem] flex-col  justify-around rounded-md bg-secondary/10  px-7 py-3  font-light  shadow-xl"
+      >
+        <div className="flex flex-col  space-y-2  md:flex-row md:items-center md:justify-between md:space-x-6 md:space-y-0">
           <input
-            className="rounded-lg border-b bg-transparent px-2 py-3  tracking-wide shadow-lg  outline-none focus:ring-1 focus:ring-white  md:flex-grow md:text-lg"
+            className="  border-b bg-transparent px-2 py-3 tracking-wide text-secondary   outline-none transition ease-out focus:scale-105   md:flex-grow md:text-lg"
             type="text"
             autoFocus
             placeholder="First Name"
           />
           <input
-            className="rounded-lg border-b bg-transparent px-2 py-3  tracking-wide   shadow-lg outline-none focus:ring-1 focus:ring-white  md:flex-grow md:text-lg"
+            className=" border-b bg-transparent px-2 py-3  tracking-wide  text-secondary   outline-none transition ease-out focus:scale-105    md:flex-grow md:text-lg"
             type="text"
             placeholder="Last Name"
           />
         </div>
         <input
-          className="rounded-lg border-b bg-transparent px-2 py-3  tracking-wide  shadow-lg outline-none   focus:ring-1  focus:ring-white md:text-lg"
+          className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105    md:text-lg"
           type="email"
           placeholder="Email"
         />
         <input
-          className="rounded-lg border-b bg-transparent px-2 py-3  tracking-wide  shadow-lg outline-none   focus:ring-1  focus:ring-white md:text-lg"
+          className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105      md:text-lg"
           type="text"
           placeholder="Age"
         />
         <input
-          className="rounded-lg border-b bg-transparent px-2 py-3  tracking-wide  shadow-lg outline-none   focus:ring-1  focus:ring-white md:text-lg"
+          className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105      md:text-lg"
           type="text"
           placeholder="Phone Number"
         />
         <input
-          className="rounded-lg border-b bg-transparent px-2 py-3  tracking-wide  shadow-lg outline-none   focus:ring-1  focus:ring-white md:text-lg"
+          className=" border-b bg-transparent px-2 py-3  tracking-wide text-secondary outline-none  transition ease-out   focus:scale-105      md:text-lg"
           type="password"
           placeholder="Password"
         />
 
-        <button className="rounded-lg bg-secondary py-2 font-custom text-lg text-primary outline-none md:py-4">
+        <button className="active: rounded-sm bg-secondary/10  py-2 font-custom uppercase tracking-widest  text-secondary outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
           Register
         </button>
       </form>
@@ -60,12 +67,15 @@ const Register: FC = ({}) => {
       <div className="mx-auto mt-4 flex w-full max-w-[35rem] flex-col items-center space-y-2">
         <p className="text-start">
           Already have an account?{" "}
-          <Link to="/login" className="font-custom text-secondary">
+          <Link
+            to="/login"
+            className="font-custom tracking-widest text-secondary"
+          >
             Login
           </Link>
         </p>
 
-        <Link to="/" className="underline underline-offset-2">
+        <Link to="/" className="underline underline-offset-4">
           Back to Home
         </Link>
       </div>

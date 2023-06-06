@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const Home: FC = () => {
   return (
     <>
-      <div className="flex flex-col px-10 py-4 md:flex-row md:items-center">
-        <div className="flex h-full flex-[0.5] flex-col items-center space-y-8 md:items-start md:justify-start md:space-y-28 md:text-center">
+      <div className="flex h-full flex-col px-10 py-4 md:flex-row md:items-center">
+        <div className="flex flex-[0.5] flex-col items-center space-y-8 md:items-start md:justify-start md:space-y-28 md:text-center">
           <div>
             <h1 className=" text-center font-custom text-6xl tracking-wide text-secondary md:text-start md:text-8xl lg:text-[9rem]">
               Dental Diaries
@@ -25,7 +25,7 @@ const Home: FC = () => {
             </Link>
           </button>
         </div>
-        <div className="flex h-full flex-[0.5] items-end justify-center md:items-start md:justify-center">
+        <div className="flex h-full flex-[0.5] items-end justify-center md:items-center md:justify-center">
           <img
             src={Hero}
             alt="hero-image"
