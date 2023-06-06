@@ -39,7 +39,7 @@ const User = sequelize.define(
     },
 
     phoneNumber: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

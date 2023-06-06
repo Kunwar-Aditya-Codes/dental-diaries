@@ -5,7 +5,11 @@ export default {
     extend: {
       colors: {
         primary: "#002135",
-        seconday: "#b6ecff",
+        secondary: "#b6ecff",
+      },
+
+      fontFamily: {
+        custom: "'Geologica', sans-serif",
       },
     },
   },
