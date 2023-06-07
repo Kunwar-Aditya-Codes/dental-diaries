@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { registerUserSchema } from "../lib/validations/formSchema";
 import { z } from "zod";
-import { registerUser } from "../lib/axios/api";
+import { registerUser } from "../lib/axios/userApi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
@@ -51,6 +51,7 @@ const Register: FC = ({}) => {
       console.log(response);
       setLoading(false);
     } catch (error) {
+      console.log(error);
       if (error instanceof z.ZodError) {
         toast.error(error.issues[0].message);
       } else if (error instanceof AxiosError) {
@@ -123,7 +124,7 @@ const Register: FC = ({}) => {
           placeholder="Password"
         />
 
-        <button className=" flex w-full items-center  justify-center rounded-sm bg-secondary/10 py-2  text-center font-custom uppercase tracking-widest text-secondary outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
+        <button className="flex w-full items-center  justify-center rounded-sm bg-secondary/10 py-2  text-center font-custom uppercase tracking-widest text-secondary outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
           {loading ? (
             <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin" />
           ) : (

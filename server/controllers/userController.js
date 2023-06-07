@@ -55,21 +55,20 @@ exports.loginUser = async (req, res) => {
  * @returns: { message }
  */
 exports.submitForm = async (req, res) => {
-  const { id } = req;
+  const { id, role } = req;
 
-  if (!id) {
+  if (!id && role !== "user") {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const { description, formDate, city, state, country, zipCode } = req.body;
+  const { description, city, state, country, zipCode } = req.body;
 
-  if (!description || !formDate || !city || !state || !country || !zipCode) {
+  if (!description || !city || !state || !country || !zipCode) {
     return res.status(400).json({ message: "Please fill all fields" });
   }
 
   await HealthForm.create({
     description,
-    formDate,
     city,
     state,
     country,

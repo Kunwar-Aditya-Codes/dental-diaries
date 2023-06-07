@@ -19,3 +19,14 @@ export const loginUserSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   password: z.string(),
 });
+
+export const healthFormSchema = z.object({
+  description: z
+    .string()
+    .min(20, { message: "Description is too short" })
+    .trim(),
+  city: z.string(),
+  state: z.string(),
+  country: z.string(),
+  pincode: z.string(),
+});

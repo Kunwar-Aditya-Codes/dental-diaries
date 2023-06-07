@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
-import { loginUser } from "../lib/axios/api";
+import { loginUser } from "../lib/axios/userApi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
