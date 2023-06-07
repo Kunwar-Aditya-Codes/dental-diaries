@@ -1,11 +1,13 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUserSchema } from "../lib/validations/formSchema";
 import { z } from "zod";
 import { registerUser } from "../lib/axios/userApi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import { useDispatch } from "react-redux";
+import { setToken } from "../app/slices/authSlice";
 
 type UserData = z.infer<typeof registerUserSchema>;
 
@@ -19,6 +21,9 @@ const Register: FC = ({}) => {
     phoneNumber: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -48,7 +53,11 @@ const Register: FC = ({}) => {
       const validatedUserData = registerUserSchema.parse(userData);
       setLoading(true);
       const response = await registerUser(validatedUserData);
-      console.log(response);
+
+      const { accessToken } = response.data;
+      dispatch(setToken({ accessToken }));
+      navigate("/dashboard/users/new");
+
       setLoading(false);
     } catch (error) {
       console.log(error);

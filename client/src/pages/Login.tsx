@@ -1,11 +1,13 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { loginUser } from "../lib/axios/userApi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { loginUserSchema } from "../lib/validations/formSchema";
+import { useDispatch } from "react-redux";
+import { setToken } from "../app/slices/authSlice";
 
 interface LoginProps {}
 
@@ -15,6 +17,9 @@ const Login: FC<LoginProps> = ({}) => {
     password: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,7 +41,11 @@ const Login: FC<LoginProps> = ({}) => {
       const validatedUserData = loginUserSchema.parse(userData);
       setLoading(true);
       const response = await loginUser(validatedUserData);
-      console.log(response);
+
+      const { accessToken } = response.data;
+      dispatch(setToken({ accessToken }));
+      navigate("/dashboard/users/new");
+
       setLoading(false);
     } catch (error) {
       if (error instanceof z.ZodError) {

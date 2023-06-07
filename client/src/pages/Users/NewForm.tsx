@@ -122,7 +122,7 @@ const NewForm: FC<NewFormProps> = ({}) => {
           className="rounded-sm border border-secondary/10 bg-transparent p-2 uppercase italic  tracking-wider outline-none placeholder:normal-case focus:border-b-secondary"
         />
 
-        <button className="flex items-center justify-center rounded-sm bg-secondary/10 py-3 font-semibold tracking-wider text-white">
+        <button className="flex w-full items-center  justify-center rounded-sm bg-secondary/10 py-2  text-center font-custom uppercase tracking-widest text-secondary outline-none transition ease-out active:scale-95 active:ring-2 active:ring-secondary md:py-3 md:text-xl">
           {loading ? (
             <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin" />
           ) : (
