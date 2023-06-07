@@ -5,6 +5,7 @@ import { z } from "zod";
 import toast from "react-hot-toast";
 import { submitHealthForm } from "../../lib/axios/userApi";
 import { AxiosError } from "axios";
+import useAuth from "../../hooks/useAuth";
 
 interface NewFormProps {}
 
@@ -19,6 +20,9 @@ const NewForm: FC<NewFormProps> = ({}) => {
     country: "",
     pincode: "",
   });
+
+  const auth = useAuth();
+  console.log(auth?.role);
 
   const handleChange = (
     e:
