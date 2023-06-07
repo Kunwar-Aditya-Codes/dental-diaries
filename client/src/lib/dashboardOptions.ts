@@ -12,6 +12,10 @@ export const dashboardOptions = {
 
   admin: [
     {
+      title: "Home",
+      path: "/dashboard/admin",
+    },
+    {
       title: "View Forms",
       path: "/dashboard/admin/view",
     },

@@ -42,6 +42,11 @@ const Navbar: FC<NavbarProps> = ({}) => {
                     Login
                   </li>
                 </Link>
+                <Link to="/admin_login">
+                  <li className="rounded-sm px-5 py-2 tracking-wider ring-offset-2 ring-offset-primary transition ease-out hover:bg-secondary/10 active:ring-2 active:ring-secondary md:text-lg">
+                    Admin Login
+                  </li>
+                </Link>
               </>
             )}
           </ul>

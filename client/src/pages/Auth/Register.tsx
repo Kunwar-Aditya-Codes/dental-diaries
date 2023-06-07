@@ -1,13 +1,13 @@
 import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUserSchema } from "../lib/validations/formSchema";
+import { registerUserSchema } from "../../lib/validations/formSchema";
 import { z } from "zod";
-import { registerUser } from "../lib/axios/userApi";
+import { registerUser } from "../../lib/axios/userApi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
-import { setToken } from "../app/slices/authSlice";
+import { setToken } from "../../app/slices/authSlice";
 
 type UserData = z.infer<typeof registerUserSchema>;
 

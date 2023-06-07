@@ -1,18 +1,24 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
+import Login from "./pages/Auth/Login";
 import Layout from "./components/Layout";
-import Register from "./pages/Register";
+import Register from "./pages/Auth/Register";
 import DashboardLayout from "./components/DashboardLayout";
 import NewForm from "./pages/Users/NewForm";
+import Dashboard from "./pages/Admin/Dashboard";
+import AdminLogin from "./pages/Auth/AdminLogin";
 
 function App({}) {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/user_register" element={<Register />} />
+
+        <Route path="/admin_login" element={<AdminLogin />} />
+
         {/* Protected Routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           {/* User Routes */}
@@ -22,7 +28,9 @@ function App({}) {
           </Route>
 
           {/* Admin Routes */}
-          <Route path="/dashboard/admin"></Route>
+          <Route path="/dashboard/admin">
+            <Route index element={<Dashboard />} />
+          </Route>
         </Route>
       </Route>
     </Routes>
