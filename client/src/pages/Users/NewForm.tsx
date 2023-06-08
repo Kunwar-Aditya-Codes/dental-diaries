@@ -21,9 +21,6 @@ const NewForm: FC<NewFormProps> = ({}) => {
     pincode: "",
   });
 
-  const auth = useAuth();
-  console.log(auth?.role);
-
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
