@@ -12,10 +12,10 @@ const useAuth = () => {
     id = decodedToken.id;
     role = decodedToken.role;
 
-    return { id, role };
+    return { id, role, token };
   }
 
-  return { id, role };
+  return { id, role, token };
 };
 
 export default useAuth;

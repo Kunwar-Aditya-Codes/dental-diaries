@@ -44,7 +44,7 @@ const Login: FC<LoginProps> = ({}) => {
 
       const { accessToken } = response.data;
       dispatch(setToken({ accessToken }));
-      navigate("/dashboard/users/new");
+      navigate("/dashboard/users");
 
       setLoading(false);
     } catch (error) {

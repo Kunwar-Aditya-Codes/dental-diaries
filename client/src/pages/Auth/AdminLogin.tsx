@@ -42,11 +42,9 @@ const AdminLogin: FC<LoginProps> = ({}) => {
       setLoading(true);
       const response = await loginAdmin(validatedUserData);
 
-      console.log(response.data);
-
       const { accessToken } = response.data;
       dispatch(setToken({ accessToken }));
-      navigate("/dashboard/admin");
+      navigate("/dashboard/admin/view");
 
       setLoading(false);
     } catch (error) {

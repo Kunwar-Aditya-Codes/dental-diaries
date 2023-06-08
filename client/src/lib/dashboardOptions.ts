@@ -1,6 +1,10 @@
 export const dashboardOptions = {
   users: [
     {
+      title: "Home",
+      path: "/dashboard",
+    },
+    {
       title: "New Form",
       path: "/dashboard/users/new",
     },
@@ -11,10 +15,6 @@ export const dashboardOptions = {
   ],
 
   admin: [
-    {
-      title: "Home",
-      path: "/dashboard/admin",
-    },
     {
       title: "View Forms",
       path: "/dashboard/admin/view",

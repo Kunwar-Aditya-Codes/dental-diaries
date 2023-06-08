@@ -25,3 +25,9 @@ export const submitHealthForm = async (data: HealthFormData) => {
   const response = await axiosInstance.post("/user/submit_form", data);
   return response;
 };
+
+export const getProfile = async (axiosInstance: any) => {
+  const response = await axiosInstance.get("/user/view_profile");
+
+  return response;
+};
