@@ -3,12 +3,10 @@ import { getProfile } from "../../lib/axios/userApi";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-interface DashboardProps {}
-
 const Dashboard = ({}) => {
   const axiosInstance = useAxiosInstance();
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["profile"],
     queryFn: () => getProfile(axiosInstance),
   });
