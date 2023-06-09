@@ -2,7 +2,7 @@ export const dashboardOptions = {
   users: [
     {
       title: "Home",
-      path: "/dashboard",
+      path: "/dashboard/users",
     },
     {
       title: "New Form",

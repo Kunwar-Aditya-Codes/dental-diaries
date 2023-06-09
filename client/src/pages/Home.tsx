@@ -1,8 +1,16 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Hero from "/hero.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 
 const Home: FC = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    if (isAuthenticated) {
+      //  navigate("/dashboard/users");
+    }
+    return () => {};
+  }, []);
   return (
     <>
       <div className="flex h-full flex-col px-10 py-4 md:flex-row md:items-center">

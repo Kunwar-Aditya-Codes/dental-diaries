@@ -5,6 +5,7 @@ import useAuth from "../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { removeToken } from "../app/slices/authSlice";
 import { FiLogOut } from "react-icons/fi";
+import { axiosInstance } from "../lib/axios/axios";
 
 interface DashboardLayoutProps {}
 
@@ -15,7 +16,8 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await axiosInstance.post("/auth/logout");
     dispatch(removeToken());
     navigate("/login");
   };
