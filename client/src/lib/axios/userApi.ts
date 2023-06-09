@@ -20,14 +20,23 @@ export const loginUser = async (user: LoginUserData) => {
   return response;
 };
 
-export const submitHealthForm = async (data: HealthFormData) => {
-  // Send accessToken in header
-  const response = await axiosInstance.post("/user/submit_form", data);
+export const submitHealthForm = async ({
+  data,
+  privateAxiosInstance,
+}: {
+  data: HealthFormData;
+  privateAxiosInstance: any;
+}) => {
+  const response = await privateAxiosInstance.post("/user/submit_form", data);
   return response;
 };
 
 export const getProfile = async (axiosInstance: any) => {
   const response = await axiosInstance.get("/user/view_profile");
+  return response;
+};
 
+export const viewHistory = async (axiosInstance: any) => {
+  const response = await axiosInstance.get("/user/view_history");
   return response;
 };

@@ -16,7 +16,6 @@ const PersistLogin: FC<PersistLoginProps> = ({}) => {
   useEffect(() => {
     let isMounted = true;
     const verifyRefreshToken = async () => {
-      console.log("verifyRefreshToken");
       try {
         await refresh();
       } catch (err) {

@@ -5,14 +5,14 @@ import { z } from "zod";
 import toast from "react-hot-toast";
 import { submitHealthForm } from "../../lib/axios/userApi";
 import { AxiosError } from "axios";
-import useAuth from "../../hooks/useAuth";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 interface NewFormProps {}
 
 type FormValues = z.infer<typeof healthFormSchema>;
 
 const NewForm: FC<NewFormProps> = ({}) => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [healthForm, setHealthForm] = useState<FormValues>({
     description: "",
     city: "",
@@ -20,7 +20,28 @@ const NewForm: FC<NewFormProps> = ({}) => {
     country: "",
     pincode: "",
   });
+  const queryClient = useQueryClient();
+  const { mutate, isLoading: loading } = useMutation(submitHealthForm, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["viewHistory"]);
+      toast.success("Form submitted successfully", { duration: 1000 });
+      setHealthForm({
+        description: "",
+        city: "",
+        state: "",
+        country: "",
+        pincode: "",
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message, { duration: 1000 });
+      } else toast.error("Something went wrong", { duration: 1000 });
+    },
+  });
 
+  const axiosInstance = useAxiosInstance();
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -44,24 +65,13 @@ const NewForm: FC<NewFormProps> = ({}) => {
     }
 
     try {
-      setLoading(true);
       const validatedFormData = healthFormSchema.parse(healthForm);
-      const response = await submitHealthForm(validatedFormData);
-      console.log(response);
-      toast.success("Form submitted successfully", { duration: 1000 });
 
-      setLoading(false);
+      mutate({ data: validatedFormData, privateAxiosInstance: axiosInstance});
     } catch (error) {
-      console.log(error);
       if (error instanceof z.ZodError) {
         toast.error(error.issues[0].message, { duration: 1000 });
-      } else if (error instanceof AxiosError) {
-        toast.error(error.response?.data.message, { duration: 1000 });
-      } else {
-        toast.error("Something went wrong", { duration: 1000 });
       }
-
-      setLoading(false);
     }
   };
 

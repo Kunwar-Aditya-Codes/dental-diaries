@@ -4,12 +4,10 @@ import { useDispatch } from "react-redux";
 
 const useRefresh = () => {
   const dispatch = useDispatch();
- 
+
   const refresh = async () => {
     const response = await axiosInstance.post("/auth/refresh_token");
     const { accessToken } = response.data;
-
-    console.log("refresh token", accessToken);
 
     if (accessToken) {
       dispatch(setToken({ accessToken }));

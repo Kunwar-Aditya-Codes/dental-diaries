@@ -10,6 +10,7 @@ import AdminLogin from "./pages/Auth/AdminLogin";
 import ViewForms from "./pages/Admin/ViewForms";
 import RequireAuth from "./components/RequireAuth";
 import PersistLogin from "./components/PersistLogin";
+import ViewHistory from "./pages/Users/ViewHistory";
 
 function App({}) {
   return (
@@ -33,7 +34,7 @@ function App({}) {
                 <Route path="/dashboard/users/new" element={<NewForm />} />
                 <Route
                   path="/dashboard/users/history"
-                  element={<h1>History</h1>}
+                  element={<ViewHistory />}
                 />
               </Route>
             </Route>

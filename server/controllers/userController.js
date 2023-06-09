@@ -61,9 +61,11 @@ exports.submitForm = async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const { description, city, state, country, zipCode } = req.body;
+  const { description, city, state, country, pincode } = req.body;
 
-  if (!description || !city || !state || !country || !zipCode) {
+  console.log(req.body);
+
+  if (!description || !city || !state || !country || !pincode) {
     return res.status(400).json({ message: "Please fill all fields" });
   }
 
@@ -72,7 +74,7 @@ exports.submitForm = async (req, res) => {
     city,
     state,
     country,
-    zipCode,
+    zipCode: pincode,
     userId: id,
   });
 
