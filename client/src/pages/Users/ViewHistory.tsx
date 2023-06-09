@@ -11,11 +11,12 @@ const ViewHistory: FC<ViewHistoryProps> = ({}) => {
     pending: "text-yellow-500",
     approved: "text-green-500",
     rejected: "text-red-500",
+    completed: "text-sky-500",
   };
 
   const axiosInstance = useAxiosInstance();
 
-  const { data, isLoading, isError, error } = useQuery(
+  const { data, isLoading } = useQuery(
     ["viewHistory"],
     () => viewHistory(axiosInstance),
     {
@@ -37,7 +38,7 @@ const ViewHistory: FC<ViewHistoryProps> = ({}) => {
           <AiOutlineLoading3Quarters className="mx-auto mt-4 animate-spin  text-2xl text-secondary" />
         ) : (
           <>
-            {forms?.map((form: any) => (
+            {forms?.map((form: IHEALTHFORM) => (
               <div
                 key={form.formId}
                 className="mx-4 mb-4 flex flex-col space-y-2 rounded-sm bg-secondary/10 p-4 text-lg text-gray-200 lg:mx-0"
