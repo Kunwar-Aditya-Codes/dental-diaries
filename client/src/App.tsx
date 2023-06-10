@@ -11,6 +11,7 @@ import ViewForms from "./pages/Admin/ViewForms";
 import RequireAuth from "./components/RequireAuth";
 import PersistLogin from "./components/PersistLogin";
 import ViewHistory from "./pages/Users/ViewHistory";
+import EditForm from "./pages/Admin/EditForm";
 
 function App({}) {
   return (
@@ -24,7 +25,6 @@ function App({}) {
         <Route path="/admin_login" element={<AdminLogin />} />
 
         {/* Protected Routes */}
-
         <Route element={<PersistLogin />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
             {/* User Routes */}
@@ -43,6 +43,7 @@ function App({}) {
             <Route element={<RequireAuth role={"admin"} />}>
               <Route path="/dashboard/admin">
                 <Route path="/dashboard/admin/view" element={<ViewForms />} />
+                <Route path="/dashboard/admin/edit" element={<EditForm />} />
               </Route>
             </Route>
           </Route>

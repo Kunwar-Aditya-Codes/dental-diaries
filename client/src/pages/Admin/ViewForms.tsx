@@ -1,9 +1,8 @@
-// import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import { viewForms } from "../../lib/axios/adminApi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-interface ViewFormsProps {}
+// AIzaSyAjR5Tj7We-xphIvHf6trnJl1Euh2VMi1U - Google Api Key
 
 const ViewForms = ({}) => {
   const axiosInstance = useAxiosInstance();

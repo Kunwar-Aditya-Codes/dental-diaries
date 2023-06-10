@@ -67,7 +67,7 @@ const NewForm: FC<NewFormProps> = ({}) => {
     try {
       const validatedFormData = healthFormSchema.parse(healthForm);
 
-      mutate({ data: validatedFormData, privateAxiosInstance: axiosInstance});
+      mutate({ data: validatedFormData, privateAxiosInstance: axiosInstance });
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error(error.issues[0].message, { duration: 1000 });

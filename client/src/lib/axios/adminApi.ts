@@ -2,7 +2,6 @@ import { z } from "zod";
 import { loginUserSchema } from "../validations/formSchema";
 import { axiosInstance } from "./axios";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 type AdminLoginData = z.infer<typeof loginUserSchema>;
 
