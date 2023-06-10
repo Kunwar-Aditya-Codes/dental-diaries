@@ -2,6 +2,9 @@ import { FC } from "react";
 import Hero from "/hero.png";
 import { Link } from "react-router-dom";
 import { AiOutlineTwitter } from "react-icons/ai";
+import { FaFacebook, FaInstagram, FaTwitterSquare } from "react-icons/fa";
+// @ts-ignore
+import Fade from "react-reveal/Fade";
 
 const tweets = [
   {
@@ -87,28 +90,65 @@ const Home: FC = () => {
         <h1 className="mx-2 mb-16 text-center font-custom text-2xl italic drop-shadow-[3px_5px_50px_rgba(182,236,255,1)] sm:text-4xl md:text-6xl">
           Our customers love us...
         </h1>
+
         <div className="mx-auto grid max-w-[85rem] grid-cols-1 justify-items-center gap-[5rem] px-4 py-8 lg:grid-cols-2 ">
-          {tweets.map((tweet) => (
-            <div
-              key={tweet.id}
-              className="mx-2 flex max-h-[25rem] max-w-[35rem] cursor-default items-start  justify-between space-x-4 rounded-md bg-secondary/10 px-4 py-6 shadow-lg backdrop-blur-md"
-            >
-              <AiOutlineTwitter className="h-8 w-8 flex-[0.2]  text-sky-500" />
-              <div className="flex h-full flex-[0.8] flex-col justify-between px-4 lg:space-y-4 ">
-                <p className="text-justify text-base md:text-lg">
-                  {tweet.tweet}
-                </p>
-                <p className="text-right font-custom text-sm ">{tweet.name}</p>
+          <Fade bottom cascade>
+            {tweets.map((tweet) => (
+              <div
+                key={tweet.id}
+                className="mx-2 flex max-h-[25rem] max-w-[35rem] cursor-default items-start  justify-between space-x-4 rounded-md bg-secondary/10 px-4 py-6 shadow-lg backdrop-blur-md"
+              >
+                <AiOutlineTwitter className="h-8 w-8 flex-[0.2]  text-sky-500" />
+                <div className="flex h-full flex-[0.8] flex-col justify-between px-4 lg:space-y-4 ">
+                  <p className="text-justify text-base md:text-lg">
+                    {tweet.tweet}
+                  </p>
+                  <p className="text-right font-custom text-sm ">
+                    {tweet.name}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </Fade>
         </div>
       </div>
 
       {/* Footer Section */}
-      <div className="w-full  text-white">
-        <div className="mx-auto max-w-[85rem] p-4">
-          <div></div>
+      <div className="mt-8 w-full bg-secondary/10 text-white">
+        <div className="mx-auto flex max-w-[85rem] flex-col items-center space-y-6 px-4 py-8 text-center  lg:flex-row lg:items-start lg:justify-between lg:space-y-0">
+          <div>
+            <div>
+              <h1 className="font-custom text-lg tracking-wider ">Address</h1>
+              <p className="space-y-4  font-light">
+                1234 Main Street
+                <br />
+                Anytown, USA 12345
+              </p>
+            </div>
+            <div className="mt-6">
+              <h1 className="font-custom text-lg tracking-wider ">Contact</h1>
+              <p className="space-y-4  font-light">
+                Phone: 123-456-7890
+                <br />
+                Email: support@dentaldiaries.com
+              </p>
+            </div>
+          </div>
+          <div>
+            <h1 className="font-custom text-lg tracking-wider ">Socials</h1>
+            <div className="mt-2 flex space-x-4">
+              <FaFacebook className="h-6 w-6 text-white" />
+              <FaInstagram className="h-6 w-6 text-white" />
+              <FaTwitterSquare className="h-6 w-6 text-white" />
+            </div>
+          </div>
+          <div>
+            <p>
+              &copy; {new Date().getFullYear()} Kunwar Aditya.
+              <br />
+              All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </div>
