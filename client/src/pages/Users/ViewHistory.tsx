@@ -41,20 +41,22 @@ const ViewHistory: FC<ViewHistoryProps> = ({}) => {
             {forms?.map((form: IHEALTHFORM) => (
               <div
                 key={form.formId}
-                className="mx-4 mb-4 flex flex-col space-y-2 rounded-sm bg-secondary/10 p-4 text-lg text-gray-200 lg:mx-0"
+                className="mx-4 mb-4 flex flex-col space-y-2 rounded-sm bg-secondary/10 p-4 text-base text-gray-200 lg:mx-0"
               >
                 <p className="overflow-hidden overflow-ellipsis whitespace-nowrap">
-                  <span className="mr-1 font-custom text-secondary">
+                  <span className="mr-1 font-custom text-lg  tracking-wider text-secondary">
                     Problem:
                   </span>
                   {form.description}
                 </p>
                 <p>
-                  <span className="mr-1 font-custom text-secondary">Age:</span>
+                  <span className="mr-1 font-custom text-lg  tracking-wider text-secondary">
+                    Age:
+                  </span>
                   {form.User.age}
                 </p>
                 <p>
-                  <span className="mr-1 font-custom text-secondary">
+                  <span className="mr-1 font-custom text-lg  tracking-wider text-secondary">
                     Submitted on:
                   </span>
 
@@ -66,7 +68,7 @@ const ViewHistory: FC<ViewHistoryProps> = ({}) => {
                 ${formStatus[form.formStatus as keyof typeof formStatus]}
                 `}
                 >
-                  <span className="mr-1 font-custom text-secondary">
+                  <span className="mr-1 font-custom text-lg  tracking-wider text-secondary">
                     Status:
                   </span>
                   <span className="font-medium tracking-wider">
@@ -75,7 +77,7 @@ const ViewHistory: FC<ViewHistoryProps> = ({}) => {
                 </p>
 
                 <p>
-                  <span className="mr-1 font-custom text-secondary">
+                  <span className="mr-1 font-custom text-lg  tracking-wider text-secondary">
                     Location:
                   </span>
                   {form.city}, {form.state}, {form.country} - {form.zipCode}

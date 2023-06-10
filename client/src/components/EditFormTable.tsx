@@ -36,21 +36,11 @@ const EditFormTable: FC<EditFormTableProps> = ({ forms }) => {
   });
 
   const handleFormStatusUpdate = async (formId: string, formStatus: string) => {
-    await mutation.mutateAsync(
-      {
-        axiosInstance,
-        formId,
-        formStatus,
-      },
-      {
-        onSuccess: (data) => {
-          console.log(data);
-        },
-        onError: (error) => {
-          console.log(error);
-        },
-      }
-    );
+    await mutation.mutateAsync({
+      axiosInstance,
+      formId,
+      formStatus,
+    });
   };
 
   return (
@@ -82,7 +72,7 @@ const EditFormTable: FC<EditFormTableProps> = ({ forms }) => {
                 {form.User.firstName} {form.User.lastName}
               </td>
               <td>{form.User.age}</td>
-              <td>{form.description}</td>
+              <td className="w-5 text-center">{form.description}</td>
               <td>
                 <select
                   className={`${
@@ -101,7 +91,7 @@ const EditFormTable: FC<EditFormTableProps> = ({ forms }) => {
               <td>{new Date(form.createdAt).toLocaleDateString()}</td>
               <td>
                 <button
-                  className="rounded-sm bg-secondary px-4 py-2 font-medium text-primary"
+                  className=" rounded-sm bg-secondary/10 px-4 py-2 font-medium text-secondary transition ease-out active:scale-95"
                   onClick={() =>
                     handleFormStatusUpdate(
                       form.formId,

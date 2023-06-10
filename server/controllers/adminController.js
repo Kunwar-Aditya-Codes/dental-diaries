@@ -66,6 +66,7 @@ exports.viewForms = async (req, res) => {
   }
 
   const forms = await HealthForm.findAll({
+    order: [["createdAt", "DESC"]],
     include: [
       {
         model: User,
