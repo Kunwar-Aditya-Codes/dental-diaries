@@ -25,6 +25,20 @@ export const viewForms = (axiosInstance: any) => {
       refetchInterval: 5000,
     }
   );
-
   return { data, isLoading, error };
+};
+
+export const updateForm = async ({
+  axiosInstance,
+  formId,
+  formStatus,
+}: {
+  axiosInstance: any;
+  formId: string;
+  formStatus: string;
+}) => {
+  const response = await axiosInstance.patch(`/admin/view_forms/${formId}`, {
+    formStatus,
+  });
+  return response;
 };

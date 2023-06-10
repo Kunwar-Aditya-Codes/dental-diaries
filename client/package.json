@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.9.2",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "daisyui": "^3.0.22",
     "jwt-decode": "^3.1.2",
     "lucide-react": "^0.241.0",
     "react": "^18.2.0",

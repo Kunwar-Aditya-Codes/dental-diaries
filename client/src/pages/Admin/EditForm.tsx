@@ -8,11 +8,19 @@ interface EditFormProps {}
 
 const EditForm: FC<EditFormProps> = ({}) => {
   const axiosInstance = useAxiosInstance();
-  const forms = viewForms(axiosInstance);
+  const { data, isLoading } = viewForms(axiosInstance);
+
+  const forms = data?.data?.forms;
 
   return (
-    <div>
-      <EditFormTable />
+    <div className="">
+      {isLoading ? (
+        <AiOutlineLoading3Quarters className="mx-auto mt-4 animate-spin  text-2xl text-secondary" />
+      ) : (
+        <>
+          <EditFormTable forms={forms} />
+        </>
+      )}
     </div>
   );
 };

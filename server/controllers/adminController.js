@@ -110,5 +110,7 @@ exports.updateFormStatus = async (req, res) => {
   form.formStatus = formStatus;
   await form.save();
 
-  res.status(200).json({ message: "Form updated successfully!" });
+  res.status(200).json({
+    message: "Form updated successfully!",
+  });
 };
