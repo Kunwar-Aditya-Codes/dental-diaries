@@ -1,19 +1,11 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import Hero from "/hero.png";
-import { Link, useLocation, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home: FC = () => {
-  const location = useLocation();
-  useEffect(() => {
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if (isAuthenticated) {
-      //  navigate("/dashboard/users");
-    }
-    return () => {};
-  }, []);
   return (
-    <>
-      <div className="flex h-full flex-col px-10 py-4 md:flex-row md:items-center">
+    <div className="min-h-screen min-w-full">
+      <div className="mx-auto flex h-[90%] max-w-[85rem] flex-col px-10 py-4 md:flex-row md:items-center">
         <div className="flex flex-[0.5] flex-col items-center space-y-8 md:items-start md:justify-start md:space-y-28 md:text-center">
           <div>
             <h1 className=" text-center font-custom text-6xl tracking-wide text-secondary md:text-start md:text-8xl lg:text-[9rem]">
@@ -41,10 +33,21 @@ const Home: FC = () => {
           />
         </div>
       </div>
-      <div className="">
-        <h1></h1>
+
+      {/* Tweets Card Section */}
+      <div className="w-full bg-white text-primary">
+        <div className="mx-auto max-w-[85rem] p-4">
+          <div></div>
+        </div>
       </div>
-    </>
+
+      {/* Footer Section */}
+      <div className="w-full  text-white">
+        <div className="mx-auto max-w-[85rem] p-4">
+          <div></div>
+        </div>
+      </div>
+    </div>
   );
 };
 

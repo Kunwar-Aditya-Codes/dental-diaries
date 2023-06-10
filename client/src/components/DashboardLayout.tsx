@@ -42,7 +42,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
   };
 
   return (
-    <div className=" flex flex-grow flex-col space-y-6 ">
+    <div className=" mx-auto flex w-full max-w-[85rem] flex-grow flex-col space-y-6">
       <nav className="rounded-sm bg-secondary/10 shadow-lg">
         <ul className="flex h-[3rem] items-center justify-between uppercase tracking-wider">
           <ul className="flex h-full items-center uppercase tracking-wider">

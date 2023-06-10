@@ -10,7 +10,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
   const { id } = useAuth();
 
   return (
-    <header className="w-full max-w-[85rem] px-10 py-4">
+    <header className="mx-auto w-full max-w-[85rem] px-10 py-4">
       <nav className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
         <div
           className={`${id && "w-full"}
