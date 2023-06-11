@@ -15,6 +15,10 @@ import EditForm from "./pages/Admin/EditForm";
 import CreateAdmin from "./pages/Admin/CreateAdmin";
 import ViewAdmins from "./pages/Admin/ViewAdmins";
 
+// TODO: Add a 404 page
+// TODO: Delete admin account
+// TODO: Add map
+
 function App({}) {
   return (
     <Routes>
@@ -63,6 +67,8 @@ function App({}) {
             </Route>
           </Route>
         </Route>
+
+        <Route path="*" element={<h1>Error:404!</h1>} />
       </Route>
     </Routes>
   );

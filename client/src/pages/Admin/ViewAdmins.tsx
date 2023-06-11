@@ -1,8 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { FC } from "react";
-import { viewAdmins } from "../../lib/axios/adminApi";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { viewAdmins, deleteAdmin } from "../../lib/axios/adminApi";
+import { AiOutlineLoading3Quarters, AiFillDelete } from "react-icons/ai";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
+import { toast } from "react-hot-toast";
 
 type Admin = {
   adminId: string;
@@ -23,7 +24,28 @@ const ViewAdmins: FC = ({}) => {
     refetchInterval: 10000,
   });
 
+  const mutation = useMutation(deleteAdmin, {
+    onSuccess: () => {
+      toast.success("Admin Deleted Successfully");
+    },
+
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+
   const admins = data?.data?.admins;
+
+  const handleDelete = (adminId: string) => {
+    try {
+      mutation.mutate({
+        adminId,
+        axiosInstance,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -44,13 +66,18 @@ const ViewAdmins: FC = ({}) => {
           </thead>
           <tbody>
             {admins?.map((admin: Admin) => (
-              <tr key={admin.adminId} className="border-none text-center">
+              <tr
+                key={admin.adminId}
+                className="border-none text-center text-white"
+              >
                 <td>{admin.adminName}</td>
                 <td>{admin.adminEmail}</td>
                 <td>{admin.adminRole}</td>
                 <td>{new Date(admin.createdAt).toLocaleString()}</td>
                 <td>
-                  <button className="">Delete</button>
+                  <button onClick={() => handleDelete(admin.adminId)}>
+                    <AiFillDelete className="h-6 w-6 text-red-500" />
+                  </button>
                 </td>
               </tr>
             ))}

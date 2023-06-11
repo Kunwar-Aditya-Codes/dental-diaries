@@ -67,6 +67,17 @@ export const newAdmin = async ({
 
 export const viewAdmins = async (axiosInstance: any) => {
   const response = await axiosInstance.get("/admin/view_admins");
+  return response;
+};
+
+export const deleteAdmin = async ({
+  axiosInstance,
+  adminId,
+}: {
+  axiosInstance: any;
+  adminId: string;
+}) => {
+  const response = await axiosInstance.delete(`/admin/delete_admin/${adminId}`);
 
   return response;
 };
