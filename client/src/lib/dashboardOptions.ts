@@ -24,4 +24,15 @@ export const dashboardOptions = {
       path: "/dashboard/admin/edit",
     },
   ],
+
+  superAdmin: [
+    {
+      title: "New Admin",
+      path: "/dashboard/admin/create",
+    },
+    {
+      title: "View Admins",
+      path: "/dashboard/admin/view_admins",
+    },
+  ],
 };

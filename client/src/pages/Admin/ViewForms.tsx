@@ -12,7 +12,7 @@ const ViewForms = ({}) => {
     completed: "text-sky-500",
   };
 
-  const { data, error, isLoading } = viewForms(axiosInstance);
+  const { data, isLoading } = viewForms(axiosInstance);
 
   const forms = data?.data?.forms;
 

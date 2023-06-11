@@ -12,6 +12,7 @@ interface DashboardLayoutProps {}
 const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
   const userOptions = dashboardOptions.users;
   const adminOptions = dashboardOptions.admin;
+  const superOptions = dashboardOptions.superAdmin;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
     const defaultTab =
       role === "user"
         ? userOptions[0].path
-        : role === "admin"
+        : role === "admin" || role === "super"
         ? adminOptions[0].path
         : null;
     setActiveTab(location.pathname || defaultTab);
@@ -64,7 +65,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
                   </Link>
                 ))}
               </>
-            ) : role === "admin" ? (
+            ) : role === "admin" || role === "super" ? (
               <>
                 {adminOptions.map((option) => (
                   <Link
@@ -81,6 +82,26 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
                     <li className="">{option.title}</li>
                   </Link>
                 ))}
+
+                {role === "super" && (
+                  <>
+                    {superOptions.map((option) => (
+                      <Link
+                        key={option.path}
+                        to={option.path}
+                        onClick={() => setActiveTab(option.path)}
+                        className={` ${
+                          activeTab === option.path
+                            ? "bg-secondary  text-primary"
+                            : "text-secondary"
+                        }
+                  flex h-full items-center rounded-sm px-4 transition-all duration-200 ease-in-out hover:scale-105`}
+                      >
+                        <li className="">{option.title}</li>
+                      </Link>
+                    ))}
+                  </>
+                )}
               </>
             ) : null}
           </ul>

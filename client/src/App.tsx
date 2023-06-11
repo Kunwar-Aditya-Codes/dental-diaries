@@ -12,6 +12,8 @@ import RequireAuth from "./components/RequireAuth";
 import PersistLogin from "./components/PersistLogin";
 import ViewHistory from "./pages/Users/ViewHistory";
 import EditForm from "./pages/Admin/EditForm";
+import CreateAdmin from "./pages/Admin/CreateAdmin";
+import ViewAdmins from "./pages/Admin/ViewAdmins";
 
 function App({}) {
   return (
@@ -28,7 +30,7 @@ function App({}) {
         <Route element={<PersistLogin />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
             {/* User Routes */}
-            <Route element={<RequireAuth role={"user"} />}>
+            <Route element={<RequireAuth role={["user"]} />}>
               <Route path="/dashboard/users">
                 <Route index element={<Dashboard />} />
                 <Route path="/dashboard/users/new" element={<NewForm />} />
@@ -40,10 +42,23 @@ function App({}) {
             </Route>
 
             {/* Admin Routes */}
-            <Route element={<RequireAuth role={"admin"} />}>
+            <Route element={<RequireAuth role={["admin", "super"]} />}>
               <Route path="/dashboard/admin">
                 <Route path="/dashboard/admin/view" element={<ViewForms />} />
                 <Route path="/dashboard/admin/edit" element={<EditForm />} />
+
+                {/* Super Admin Routes */}
+                <Route element={<RequireAuth role={["super"]} />}>
+                  <Route
+                    path="/dashboard/admin/create"
+                    element={<CreateAdmin />}
+                  />
+
+                  <Route
+                    path="/dashboard/admin/view_admins"
+                    element={<ViewAdmins />}
+                  />
+                </Route>
               </Route>
             </Route>
           </Route>

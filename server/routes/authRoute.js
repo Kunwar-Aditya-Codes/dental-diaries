@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const {
   logout,
   refreshToken,
@@ -7,7 +6,9 @@ const {
   registerAdmin,
 } = require("../controllers/authController");
 
-router.route("/register_admin").post(registerAdmin);
+const verifyJwt = require("../middleware/verifyJwt");
+
+router.route("/register_admin").post(verifyJwt, registerAdmin);
 
 router.route("/logout").post(logout);
 

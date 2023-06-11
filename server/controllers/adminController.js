@@ -34,13 +34,14 @@ exports.loginAdmin = async (req, res) => {
 
   const { accessToken, refreshToken } = generateToken({
     id: foundAdmin.adminId,
-    role: "admin",
+    role: foundAdmin.adminRole,
   });
 
   res.cookie("refreshToken", refreshToken, {
-    // httpOnly: true,
-    // secure: true,
-    // sameSite: "none",
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
   res.status(200).json({
@@ -61,7 +62,8 @@ exports.loginAdmin = async (req, res) => {
 exports.viewForms = async (req, res) => {
   const { id, role } = req;
 
-  if (!id || role !== "admin") {
+  if (!id || (role !== "admin" && role !== "super")) {
+    console.log(role);
     return res.status(401).json({ message: "Unauthorized!" });
   }
 
@@ -90,7 +92,7 @@ exports.viewForms = async (req, res) => {
 exports.updateFormStatus = async (req, res) => {
   const { id, role } = req;
 
-  if (!id || role !== "admin") {
+  if (!id || (role !== "admin" && role !== "super")) {
     return res.status(401).json({ message: "Unauthorized!" });
   }
 
@@ -114,4 +116,62 @@ exports.updateFormStatus = async (req, res) => {
   res.status(200).json({
     message: "Form updated successfully!",
   });
+};
+
+/**
+ * @desc: Delete admin.
+ * @method: DELETE
+ * @api: /api/admin/delete_admin/:adminId
+ * @access: Private - Super Admin
+ * @type: Controller
+ * @param: req, res
+ * @returns: { message }
+ * @summary: Only super admin can delete admin.
+ */
+exports.deleteAdmin = async (req, res) => {
+  const { id, role } = req;
+
+  if (!id || role !== "super") {
+    return res.status(401).json({ message: "Unauthorized!" });
+  }
+
+  const { adminId } = req.params;
+
+  if (!adminId) {
+    return res.status(400).json({ message: "All fields are required!" });
+  }
+
+  const admin = await Admin.findOne({ where: { adminId } });
+
+  if (!admin) {
+    return res.status(404).json({ message: "Admin not found!" });
+  }
+
+  await admin.destroy();
+
+  res.status(200).json({ message: "Admin deleted successfully!" });
+};
+
+/**
+ * @desc: View all admins.
+ * @method: GET
+ * @api: /api/admin/view_admins
+ * @access: Private - Super Admin
+ * @type: Controller
+ * @param: req, res
+ * @returns: { message }
+ * @summary: Only super admin can view all admins.
+ */
+exports.viewAdmins = async (req, res) => {
+  const { id, role } = req;
+
+  if (!id || role !== "super") {
+    return res.status(401).json({ message: "Unauthorized!" });
+  }
+
+  const admins = await Admin.findAll({
+    where: { adminRole: "admin" },
+  });
+
+  res.status(200).json({ admins });
 };

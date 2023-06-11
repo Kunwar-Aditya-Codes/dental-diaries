@@ -1,8 +1,8 @@
-const { sequelize } = require('../config/db');
-const { DataTypes } = require('sequelize');
+const { sequelize } = require("../config/db");
+const { DataTypes } = require("sequelize");
 
 const Admin = sequelize.define(
-  'Admin',
+  "Admin",
   {
     adminId: {
       type: DataTypes.UUID,
@@ -27,10 +27,15 @@ const Admin = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    adminRole: {
+      type: DataTypes.ENUM("super", "admin"),
+      allowNull: false,
+    },
   },
   {
     timestamps: true,
-    tableName: 'admins',
+    tableName: "admins",
   }
 );
 

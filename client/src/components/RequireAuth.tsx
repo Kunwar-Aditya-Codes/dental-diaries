@@ -1,9 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Navigate, useLocation, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 interface RequireAuthProps {
-  role?: string;
+  role: string[];
 }
 
 const RequireAuth: FC<RequireAuthProps> = ({ role }) => {
@@ -11,10 +11,8 @@ const RequireAuth: FC<RequireAuthProps> = ({ role }) => {
 
   const location = useLocation();
 
-  
-
   return authId ? (
-    role && authRole === role && <Outlet />
+    role?.length > 0 && role.includes(authRole) && <Outlet />
   ) : (
     <Navigate to="/" state={{ from: location }} />
   );

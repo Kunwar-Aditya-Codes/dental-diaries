@@ -41,10 +41,7 @@ exports.refreshToken = async (req, res) => {
     return res.status(203).json({ message: "Please login!" });
   }
 
-  const decoded = await jwt.verify(
-    refreshToken,
-    process.env.REFRESH_TOKEN_SECRET
-  );
+  const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 
   const { id, role } = decoded;
 
@@ -52,7 +49,7 @@ exports.refreshToken = async (req, res) => {
 
   if (role === "user") {
     personalDetails = await User.findOne({ where: { userId: id } });
-  } else if (role === "admin") {
+  } else if (role === "admin" || role === "super") {
     personalDetails = await Admin.findOne({ where: { adminId: id } });
   }
 
@@ -66,9 +63,10 @@ exports.refreshToken = async (req, res) => {
   });
 
   res.cookie("refreshToken", newRefreshToken, {
-    // httpOnly: true,
-    // path: "/api/auth/refresh_token",
-    // maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
   return res.status(200).json({ accessToken });
@@ -113,9 +111,10 @@ exports.registerUser = async (req, res) => {
   });
 
   res.cookie("refreshToken", refreshToken, {
-    // httpOnly: true,
-    // path: "/api/auth/refresh_token",
-    // maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
   return res
@@ -133,9 +132,15 @@ exports.registerUser = async (req, res) => {
  * @returns: { message }
  */
 exports.registerAdmin = async (req, res) => {
-  const { adminName, adminEmail, adminPassword } = req.body;
+  const { role } = req;
 
-  if (!adminName || !adminEmail || !adminPassword) {
+  if (role !== "super") {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const { adminName, adminEmail, adminPassword, adminRole } = req.body;
+
+  if (!adminName || !adminEmail || !adminPassword || !adminRole) {
     return res.status(400).json({ message: "Please fill all fields" });
   }
 
@@ -151,17 +156,19 @@ exports.registerAdmin = async (req, res) => {
     adminName,
     adminEmail,
     adminPassword: hashedPassword,
+    adminRole,
   });
 
   const { accessToken, refreshToken } = await generateToken({
     id: newAdmin.adminId,
-    role: "admin",
+    role: adminRole,
   });
 
   res.cookie("refreshToken", refreshToken, {
-    // httpOnly: true,
-    // path: "/api/auth/refresh_token",
-    // maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
   return res

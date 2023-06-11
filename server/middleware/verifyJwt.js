@@ -34,7 +34,7 @@ const verifyJwt = async (req, res, next) => {
 
     req.id = foundUser.userId;
     req.role = "user";
-  } else if (role === "admin") {
+  } else if (role === "admin" || role === "super") {
     const foundAdmin = await Admin.findOne({ where: { adminId: id } });
 
     if (!foundAdmin) {
@@ -42,7 +42,7 @@ const verifyJwt = async (req, res, next) => {
     }
 
     req.id = foundAdmin.adminId;
-    req.role = "admin";
+    req.role = foundAdmin.adminRole;
   }
 
   next();
