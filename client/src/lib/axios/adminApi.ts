@@ -42,3 +42,31 @@ export const updateForm = async ({
   });
   return response;
 };
+
+export const newAdmin = async ({
+  axiosInstance,
+  adminName,
+  adminEmail,
+  adminPassword,
+  adminRole,
+}: {
+  axiosInstance: any;
+  adminName: string;
+  adminEmail: string;
+  adminPassword: string;
+  adminRole: string;
+}) => {
+  const response = await axiosInstance.post("/auth/register_admin", {
+    adminName,
+    adminEmail,
+    adminPassword,
+    adminRole,
+  });
+  return response;
+};
+
+export const viewAdmins = async (axiosInstance: any) => {
+  const response = await axiosInstance.get("/admin/view_admins");
+
+  return response;
+};

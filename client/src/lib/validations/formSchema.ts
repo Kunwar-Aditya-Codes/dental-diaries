@@ -30,3 +30,10 @@ export const healthFormSchema = z.object({
   country: z.string(),
   pincode: z.string(),
 });
+
+export const adminFormSchema = z.object({
+  adminName: z.string().min(2, { message: "Name is too short" }).trim(),
+  adminEmail: z.string().email({ message: "Invalid email address" }),
+  adminPassword: z.string().min(6, { message: "Password is too short" }),
+  adminRole: z.string(),
+});

@@ -171,6 +171,13 @@ exports.viewAdmins = async (req, res) => {
 
   const admins = await Admin.findAll({
     where: { adminRole: "admin" },
+    attributes: [
+      "adminId",
+      "adminName",
+      "adminEmail",
+      "adminRole",
+      "createdAt",
+    ],
   });
 
   res.status(200).json({ admins });
