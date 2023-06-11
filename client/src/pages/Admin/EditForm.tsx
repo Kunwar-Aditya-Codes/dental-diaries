@@ -17,9 +17,9 @@ const EditForm: FC<EditFormProps> = ({}) => {
       {isLoading ? (
         <AiOutlineLoading3Quarters className="mx-auto mt-4 animate-spin  text-2xl text-secondary" />
       ) : (
-        <>
+        <div className="h-[32rem] overflow-hidden overflow-y-scroll ">
           <EditFormTable forms={forms} />
-        </>
+        </div>
       )}
     </div>
   );

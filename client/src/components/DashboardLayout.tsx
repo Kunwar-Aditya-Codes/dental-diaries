@@ -42,7 +42,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
   };
 
   return (
-    <div className=" mx-auto flex w-full max-w-[85rem] flex-grow flex-col space-y-6">
+    <div className=" relative mx-auto flex w-full max-w-[85rem] flex-grow flex-col space-y-6">
       <nav className="rounded-sm bg-secondary/10 shadow-lg">
         <ul className="flex h-[3rem] items-center justify-between uppercase tracking-wider">
           <ul className="flex h-full items-center uppercase tracking-wider">
@@ -96,6 +96,21 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
         </ul>
       </nav>
       <Outlet />
+
+      <h1 className="absolute bottom-8 right-2 text-sm lg:right-0">
+        &copy; {new Date().getFullYear()}{" "}
+        <span>
+          <a
+            href="https://kunwar-aditya-portfolio.vercel.app/"
+            rel="noreferrer"
+            target="_blank"
+            className="font-medium tracking-wider text-secondary"
+          >
+            Kunwar Aditya
+          </a>
+        </span>
+        .
+      </h1>
     </div>
   );
 };

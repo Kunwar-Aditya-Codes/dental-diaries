@@ -22,7 +22,7 @@ const ViewForms = ({}) => {
         All Forms
       </h1>
 
-      <div className="mt-4 h-full overflow-y-scroll pb-8">
+      <div className="mt-4 h-[85%] overflow-y-scroll pb-8 lg:h-full">
         {isLoading ? (
           <AiOutlineLoading3Quarters className="mx-auto mt-4 animate-spin  text-2xl text-secondary" />
         ) : (
