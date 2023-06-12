@@ -44,28 +44,28 @@ const EditFormTable: FC<EditFormTableProps> = ({ forms }) => {
   };
 
   return (
-    <table className="table">
+    <table className="w-full">
       <thead>
-        <tr className="border-b-secondary/10 text-center text-lg">
-          <th>Form ID</th>
-          <th>Username</th>
-          <th>Age</th>
-          <th>Description</th>
-          <th>Form Status</th>
-          <th>Form Created At</th>
-          <th>Action</th>
+        <tr className="border-b border-b-secondary/10 text-center text-lg text-secondary">
+          <th className="pb-4">Form ID</th>
+          <th className="pb-4">Username</th>
+          <th className="pb-4">Age</th>
+          <th className="pb-4">Description</th>
+          <th className="pb-4">Form Status</th>
+          <th className="pb-4">Form Created At</th>
+          <th className="pb-4">Action</th>
         </tr>
       </thead>
       <tbody>
         {forms.length === 0 ? (
-          <tr>
+          <tr className="text-white">
             <td colSpan={7}>No Forms</td>
           </tr>
         ) : (
           forms.map((form) => (
             <tr
               key={form.formId}
-              className="border-none text-center font-medium"
+              className="border-none text-center font-medium text-white"
             >
               <td>{form.formId}</td>
               <td>

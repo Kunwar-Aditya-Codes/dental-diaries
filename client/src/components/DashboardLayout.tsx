@@ -118,7 +118,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({}) => {
       </nav>
       <Outlet />
 
-      <h1 className="absolute bottom-8 right-2 text-sm lg:right-0">
+      <h1 className="absolute bottom-8 right-2 text-sm text-white lg:right-0">
         &copy; {new Date().getFullYear()}{" "}
         <span>
           <a

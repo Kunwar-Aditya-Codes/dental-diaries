@@ -70,7 +70,7 @@ const CreateAdmin: FC = ({}) => {
     <div className="flex h-[80%] w-full items-center justify-center ">
       <form
         onSubmit={handleSubmit}
-        className="mx-auto flex w-[50%] flex-col space-y-8"
+        className="mx-auto flex w-[50%] flex-col space-y-8 text-white"
       >
         <input
           type="text"
@@ -108,7 +108,7 @@ const CreateAdmin: FC = ({}) => {
           value={adminForm.adminRole}
           onChange={handleAdminFormChange}
           required
-          className="rounded-sm border border-secondary/10 bg-transparent p-2  italic  tracking-wider outline-none placeholder:normal-case focus:border-b-secondary"
+          className="rounded-sm border border-secondary/10 bg-transparent p-2 italic  tracking-wider  text-white outline-none placeholder:normal-case focus:border-b-secondary"
         >
           <option value="admin">Admin</option>
           <option value="super">Super Admin</option>

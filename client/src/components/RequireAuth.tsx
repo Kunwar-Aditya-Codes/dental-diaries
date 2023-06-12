@@ -14,9 +14,7 @@ const RequireAuth: FC<RequireAuthProps> = ({ role }) => {
   return authId ? (
     role?.length > 0 && role.includes(authRole) ? (
       <Outlet />
-    ) : (
-      <Navigate to="/" state={{ from: location }} />
-    )
+    ) : null
   ) : (
     <Navigate to="/" state={{ from: location }} />
   );

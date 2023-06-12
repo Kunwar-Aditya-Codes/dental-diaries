@@ -49,41 +49,43 @@ const ViewAdmins: FC = ({}) => {
   };
 
   return (
-    <div>
+    <div className="h-full">
       {isLoading ? (
         <div className="flex items-center justify-center">
           <AiOutlineLoading3Quarters className="h-6 w-6 animate-spin" />
         </div>
       ) : (
-        <table className="table max-h-[32rem] overflow-y-scroll">
-          <thead>
-            <tr className="border-none text-center font-custom text-lg uppercase tracking-wider text-secondary">
-              <th> Name</th>
-              <th> Email</th>
-              <th>Role</th>
-              <th>Created At</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {admins?.map((admin: Admin) => (
-              <tr
-                key={admin.adminId}
-                className="border-none text-center text-white"
-              >
-                <td>{admin.adminName}</td>
-                <td>{admin.adminEmail}</td>
-                <td>{admin.adminRole}</td>
-                <td>{new Date(admin.createdAt).toLocaleString()}</td>
-                <td>
-                  <button onClick={() => handleDelete(admin.adminId)}>
-                    <AiFillDelete className="h-6 w-6 text-red-500" />
-                  </button>
-                </td>
+        <div className=" h-full max-h-[32rem] overflow-y-scroll">
+          <table className="  w-full table-auto  border-collapse  ">
+            <thead className="">
+              <tr className=" text-center font-custom text-lg uppercase tracking-wider text-secondary">
+                <th className="pb-6"> Name</th>
+                <th className="pb-6"> Email</th>
+                <th className="pb-6">Role</th>
+                <th className="pb-6">Created At</th>
+                <th className="pb-6">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {admins?.map((admin: Admin) => (
+                <tr
+                  key={admin.adminId}
+                  className=" border-none  text-center text-white"
+                >
+                  <td className="py-3">{admin.adminName}</td>
+                  <td>{admin.adminEmail}</td>
+                  <td>{admin.adminRole}</td>
+                  <td>{new Date(admin.createdAt).toLocaleString()}</td>
+                  <td>
+                    <button onClick={() => handleDelete(admin.adminId)}>
+                      <AiFillDelete className="h-6 w-6 text-red-500" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
