@@ -6,7 +6,8 @@ interface IUser {
   phoneNumber: number;
 }
 
-interface IHEALTHFORM {
+interface;
+{
   formId: string;
   description: string;
   User: IUser;
@@ -17,3 +18,14 @@ interface IHEALTHFORM {
   zipCode: string;
   createdAt: string;
 }
+
+declare module "*.png";
+declare module "*.jpg";
+declare module "*.jpeg";
+declare module "*.svg";
+declare module "*.gif";
+declare module "*.pdf";
+declare module "*.doc";
+declare module "*.docx";
+declare module "*.xls";
+declare module "*.xlsx";
