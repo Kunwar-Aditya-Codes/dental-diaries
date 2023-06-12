@@ -6,8 +6,7 @@ interface IUser {
   phoneNumber: number;
 }
 
-interface;
-{
+interface IHEALTHFORM {
   formId: string;
   description: string;
   User: IUser;
@@ -28,4 +27,3 @@ declare module "*.pdf";
 declare module "*.doc";
 declare module "*.docx";
 declare module "*.xls";
-declare module "*.xlsx";
