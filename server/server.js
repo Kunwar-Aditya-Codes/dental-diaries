@@ -2,7 +2,7 @@ require("dotenv").config();
 require("express-async-errors");
 require("./config/associations");
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 
@@ -11,12 +11,12 @@ const { sequelize, testConnection } = require("./config/db");
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
 app.use(cookieParser());
 
 /**
