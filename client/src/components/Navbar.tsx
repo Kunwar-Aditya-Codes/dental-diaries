@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Logo from "/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 

@@ -12,7 +12,11 @@ const RequireAuth: FC<RequireAuthProps> = ({ role }) => {
   const location = useLocation();
 
   return authId ? (
-    role?.length > 0 && role.includes(authRole) && <Outlet />
+    role?.length > 0 && role.includes(authRole) ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/" state={{ from: location }} />
+    )
   ) : (
     <Navigate to="/" state={{ from: location }} />
   );
