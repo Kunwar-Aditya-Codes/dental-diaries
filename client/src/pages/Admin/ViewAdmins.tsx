@@ -15,6 +15,7 @@ type Admin = {
 
 const ViewAdmins: FC = ({}) => {
   const axiosInstance = useAxiosInstance();
+
   const { data, isLoading } = useQuery({
     queryKey: ["admins"],
     queryFn: () => viewAdmins(axiosInstance),
