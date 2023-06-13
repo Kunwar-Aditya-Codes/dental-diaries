@@ -94,16 +94,6 @@ const AdminLogin: FC<LoginProps> = ({}) => {
       </form>
 
       <div className="mx-auto mt-4 flex w-full max-w-[35rem] flex-col items-center space-y-2">
-        <p className="text-start">
-          Don't have an account?{" "}
-          <Link
-            to="/user_register"
-            className="font-custom tracking-widest text-secondary"
-          >
-            Register
-          </Link>
-        </p>
-
         <Link to="/" className="underline underline-offset-4">
           Back to Home
         </Link>

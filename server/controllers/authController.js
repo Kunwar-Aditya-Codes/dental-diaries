@@ -132,11 +132,11 @@ exports.registerUser = async (req, res) => {
  * @returns: { message }
  */
 exports.registerAdmin = async (req, res) => {
-  const { role } = req;
+  // const { role } = req;
 
-  if (role !== "super") {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
+  // if (role !== "super") {
+  //   return res.status(401).json({ message: "Unauthorized" });
+  // }
 
   const { adminName, adminEmail, adminPassword, adminRole } = req.body;
 
