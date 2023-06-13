@@ -8,7 +8,7 @@ const {
 
 const verifyJwt = require("../middleware/verifyJwt");
 
-router.route("/register_admin").post(registerAdmin);
+router.route("/register_admin").post(verifyJwt, registerAdmin);
 
 router.route("/logout").post(logout);
 
