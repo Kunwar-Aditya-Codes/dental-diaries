@@ -44,7 +44,7 @@ const EditFormTable: FC<EditFormTableProps> = ({ forms }) => {
   };
 
   return (
-    <table className="w-full">
+    <table className="w-[95%] table-auto  border-collapse ">
       <thead>
         <tr className="border-b border-b-secondary/10 text-center text-lg text-secondary">
           <th className="pb-4">Form ID</th>
@@ -56,7 +56,7 @@ const EditFormTable: FC<EditFormTableProps> = ({ forms }) => {
           <th className="pb-4">Action</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="">
         {forms.length === 0 ? (
           <tr className="text-white">
             <td colSpan={7}>No Forms</td>
@@ -65,14 +65,14 @@ const EditFormTable: FC<EditFormTableProps> = ({ forms }) => {
           forms.map((form) => (
             <tr
               key={form.formId}
-              className="border-none text-center font-medium text-white"
+              className="h-[5rem] border-none  text-center text-white"
             >
-              <td>{form.formId}</td>
+              <td className="">{form.formId.slice(0, 12)}...</td>
               <td>
                 {form.User.firstName} {form.User.lastName}
               </td>
               <td>{form.User.age}</td>
-              <td className="w-5 text-center">{form.description}</td>
+              <td className="w-[20rem] text-center">{form.description}</td>
               <td>
                 <select
                   className={`${
